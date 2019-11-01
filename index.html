@@ -12,11 +12,14 @@
         <label class="heading">Get information on a park</label>
         <br />
         <input type="text" class="entryPoint" required placeholder="Enter park name">
+        <br />
+        <input type="number" name="max-results" class="max-results" value="10">
+        <br />
         <button id="submitBtn">Submit</button>
     </form>
     <section class="results">
-        <ul class="parkList">
-            
+        <ul class="parkList hidden">
+
         </ul>
     </section>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
