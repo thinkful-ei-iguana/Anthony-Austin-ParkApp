@@ -17,7 +17,9 @@ function apiCallPark(parkName) {
     .catch(error => alert('Error'));
 }
 
-function displayResults(input) {}
+function displayResults(input) {
+  input.forEach(i => )
+}
 
 $(function() {
   handleParkInfo();
