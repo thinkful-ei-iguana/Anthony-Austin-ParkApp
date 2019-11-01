@@ -24,3 +24,30 @@ function displayResults(input) {
 $(function() {
   handleParkInfo();
 });
+
+
+const extractData = function (data) {
+  data.forEach(//param => {
+    console.log(' ');
+    let {
+      name,
+      description,
+      url,
+      addressUrl,
+    } = //param name;
+  });
+};
+
+
+
+const createTemplate = function (name, description, url, addressUrl) {
+  let template = `
+  <section>
+    <h2><a href="${url}">${name}</a></h2>
+      <ul>
+        <li>Description: ${description}</li>
+        <li>Address Link: ${addressUrl}</li>
+      </ul>
+  </section>
+  `;
+};
