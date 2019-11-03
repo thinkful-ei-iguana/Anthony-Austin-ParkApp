@@ -2,14 +2,15 @@
 // User can view multiple results at once
 // Show each park's NAME, DESC., WEBSITE, ADDRESS -> (optional)
 
+const BASE_URL = 'https://api.nps.gov/api/v1/parks';
+const apiKey = '0nxZI9hF2LSNbDho29iIJk8FXwUmHWzH3HXGrizh';
+
 function handleParkInfo() {
   $('#dataEntry').on('submit', e => {
     e.preventDefault();
-    const apiUrl = 'https://api.nps.gov/api/v1/parks';
     const stateArr = $('.entryPoint').val().split(',');
     const maxResults = $('.max-results').val();
-    const apiKey = '0nxZI9hF2LSNbDho29iIJk8FXwUmHWzH3HXGrizh';
-    apiCallPark(apiUrl, stateArr, maxResults, apiKey);
+    apiCallPark(BASE_URL, stateArr, maxResults, apiKey);
   });
 }
 
@@ -18,17 +19,23 @@ function formatParams(params) {
   return queries.join('&');
 }
 
-function apiCallPark(apiUrl, stateArr, maxResults, apiKey) {
+function apiCallPark(BASE_URL, stateArr, maxResults, apiKey) {
   const params = {
     stateCode: stateArr,
     limit: maxResults
   };
 
   const queryString = formatParams(params);
-  const url = apiUrl + '?' + queryString + '&api_key=' + apiKey;
+  const url = `${BASE_URL}?${queryString}&api_key=${apiKey}`;
+  console.log(url);
 
   fetch(url)
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('api call error');
+    })
     .then(responseJson => createTemplate(responseJson, maxResults))
     .catch(error => alert('Error'));
 }
